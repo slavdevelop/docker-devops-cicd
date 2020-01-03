@@ -1,6 +1,7 @@
 version: '3.7'
 
 services:
+
     website:
         build:
             context: .
@@ -8,6 +9,9 @@ services:
             - 80:80
 
     unit-tests:
+        environment:
+            SELENIUM_HOST: selenium
+            SELENIUM_PORT: 4444
         volumes:
             - "$PWD:/app"
         build:
@@ -16,3 +20,9 @@ services:
         command:
             - --pattern
             - /app/spec/unit/*_spec.rb
+
+    selenium:
+        image: selenium/standalone-chrome-debug
+        ports:
+            - 4444:4444
+            - 5901:5900
