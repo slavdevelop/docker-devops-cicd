@@ -2,6 +2,11 @@ version: '3.7'
 
 services:
 
+    terraform:
+        build:
+            context: .
+            dockerfile: terraform.Dockerfile
+
     website:
         build:
             context: .
@@ -16,7 +21,7 @@ services:
             - "$PWD:/app"
         build:
             context: .
-            dockerfile: rspec.dockerfile
+            dockerfile: rspec.Dockerfile
         command:
             - --pattern
             - /app/spec/unit/*_spec.rb
